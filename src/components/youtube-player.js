@@ -10,6 +10,7 @@ class YoutubePlayer extends React.Component {
     constructor(props){
         super(props);
         this._onPause = this._onPause.bind(this);
+        this._onReady = this._onReady.bind(this);
     }
 
     render() {
@@ -17,9 +18,17 @@ class YoutubePlayer extends React.Component {
             height: '100%',
             width: '100%',
             playerVars: { // https://developers.google.com/youtube/player_parameters
-                autoplay: 1
+                autoplay: 1,
+                controls:0,
+                showCaptions:0,
+                disableKeyboard:0,
+                allowFullscreen:1,
+                annotations:0,
+                modestBranding:1,
+                showInfo:0,
+                volume:0.8
             },
-            frameborder:0
+            frameborder:0,
         };
 
         return (
@@ -47,6 +56,7 @@ class YoutubePlayer extends React.Component {
         else{
             event.target.playVideo();
         }
+        this.props.onReady();
     }
 
     _onEnd(event) {

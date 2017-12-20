@@ -24,13 +24,19 @@ class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {data: [], index: 0, wtfCount: 0};
+        this.state = {
+            data: [],
+            index: 0,
+            wtfCount: 0,
+            videoMode: false
+        };
         this.onNextButtonClick = this.onNextButtonClick.bind(this);
         this.onWtfButtonClick = this.onWtfButtonClick.bind(this);
         this._onEnd = this._onEnd.bind(this);
         this._onPause = this._onPause.bind(this);
         this.incrementIndex = this.incrementIndex.bind(this);
         this._onYoutubePlayerClicked = this._onYoutubePlayerClicked.bind(this);
+        this._onReady = this._onReady.bind(this);
     }
 
     onNextButtonClick() {
@@ -41,7 +47,7 @@ class App extends Component {
         this.incrementIndex();
     }
 
-    _onPause(event){
+    _onPause(event) {
         this.incrementIndex();
     }
 
@@ -68,11 +74,23 @@ class App extends Component {
         });
     }
 
-    _onYoutubePlayerClicked(){
+    _onYoutubePlayerClicked() {
         let index = this.state.index;
         if ((index + 1) === this.state.data.length) index = -1;
         this.setState({index: index + 1, wtfCount: this.state.data[index + 1].wtfCount});
     }
+
+    _onReady() {
+        console.log("_onReady");
+        this.setState({videoMode: true})
+    }
+
+    openingContent = () => {
+        return (
+            <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
+        )
+    }
+
 
     render() {
         let data = this.state.data[this.state.index] ? this.state.data[this.state.index] : undefined;
@@ -80,16 +98,10 @@ class App extends Component {
             <div>
                 <div className="App">
                     <header className="App-header">
-                        <img src={logo} className="App-logo" alt="logo"/>
-                        <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
-                        <p className="App-intro">
-                            Most ridiculous website of 2019
-                        </p>
-                        <button onClick={this.onNextButtonClick}>Next</button>
-                        {data && <button onClick={this.onWtfButtonClick}>What The Fuck Did I Just See</button>}
-                        {data && <span>{this.state.wtfCount}</span>}
-                        {data && <YoutubePlayer videoId={data.url} onEnd={this._onEnd}
-                                onPause={this._onPause}/>}
+                        {!this.state.videoMode && this.openingContent()}
+                        {data &&
+                        <YoutubePlayer videoId={data.url} onEnd={this._onEnd}
+                                       onPause={this._onPause} onReady={this._onReady}/>}
                     </header>
                 </div>
             </div>
