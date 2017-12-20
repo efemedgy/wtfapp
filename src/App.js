@@ -63,27 +63,27 @@ class App extends Component {
     }
 
     render() {
-        console.log("stateData:", this.state.data);
         let data = this.state.data[this.state.index] ? this.state.data[this.state.index] : undefined;
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
-                </header>
-                <p className="App-intro">
-                    Most ridiculous website of 2019
-                </p>
-                <button onClick={this.onNextButtonClick}>Next</button>
-                {data && <button onClick={this.onWtfButtonClick}>What The Fuck Did I Just See</button>}
-                {data && <span>{this.state.wtfCount}</span>}
-                {data && <YoutubePlayer videoId={data.url} onEnd={this._onEnd}/>}
+            <div>
+                <div className="App">
+                    <header className="App-header">
+                        <img src={logo} className="App-logo" alt="logo"/>
+                        <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
+                        <p className="App-intro">
+                            Most ridiculous website of 2019
+                        </p>
+                        <button onClick={this.onNextButtonClick}>Next</button>
+                        {data && <button onClick={this.onWtfButtonClick}>What The Fuck Did I Just See</button>}
+                        {data && <span>{this.state.wtfCount}</span>}
+                        {data && <YoutubePlayer videoId={data.url} onEnd={this._onEnd}/>}
+                    </header>
+                </div>
             </div>
         );
 
     }
 }
-
 
 // class YouTube extends Component {
 //     render() {

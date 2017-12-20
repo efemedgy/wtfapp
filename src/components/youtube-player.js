@@ -18,24 +18,32 @@ class YoutubePlayer extends React.Component {
 
         return (
             <YouTube
+                className="App-player"
                 videoId={this.props.videoId}
                 opts={opts}
                 onReady={this._onReady}
                 onEnd={this._onEnd.bind(this)}
+                onClick={this._onClick}
             />
         );
     }
 
+    _onClick(event){
+    }
+
     _onReady(event) {
-        console.log("_onReady")
         // access to player in all event handlers via event.target
-        event.target.playVideo();
+        if(process.env.NODE_ENV === 'development'){
+            console.log("Video is ready.")
+            event.target.pauseVideo();
+        }
+        else{
+            event.target.playVideo();
+        }
     }
 
     _onEnd(event) {
-        console.log("_onEnd")
         this.props.onEnd();
-        //event.target.pauseVideo();
     }
 
 }
