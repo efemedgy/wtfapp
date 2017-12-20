@@ -35,7 +35,6 @@ class App extends Component {
         this._onEnd = this._onEnd.bind(this);
         this._onPause = this._onPause.bind(this);
         this.incrementIndex = this.incrementIndex.bind(this);
-        this._onYoutubePlayerClicked = this._onYoutubePlayerClicked.bind(this);
         this._onReady = this._onReady.bind(this);
     }
 
@@ -74,15 +73,13 @@ class App extends Component {
         });
     }
 
-    _onYoutubePlayerClicked() {
-        let index = this.state.index;
-        if ((index + 1) === this.state.data.length) index = -1;
-        this.setState({index: index + 1, wtfCount: this.state.data[index + 1].wtfCount});
-    }
-
     _onReady() {
         console.log("_onReady");
-        this.setState({videoMode: true})
+        const index = this.state.index;
+        const length = this.state.data.length;
+        let randomIndex = Math.floor(Math.random() * length);
+
+        this.setState({videoMode: true, index: randomIndex})
     }
 
     openingContent = () => {
@@ -90,7 +87,6 @@ class App extends Component {
             <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
         )
     }
-
 
     render() {
         let data = this.state.data[this.state.index] ? this.state.data[this.state.index] : undefined;
