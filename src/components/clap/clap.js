@@ -11,7 +11,7 @@ class ClapAdapter extends Component {
         super(props)
         this.state = {
             count: 0,
-            countTotal: this._generateRandomNumber(500,10000),
+            countTotal: props.wtfCount,//this._generateRandomNumber(500,10000),
             isClicked: false,
         }
         this._handleClick = this._handleClick.bind(this);
@@ -93,6 +93,11 @@ class ClapAdapter extends Component {
         return Math.floor(Math.random()*(max-min+1)+min)
     }
 
+    componentWillReceiveProps(nextProps){
+        if(this.props !== this.nextProps){
+            this.setState({countTotal:nextProps.wtfCount});
+        }
+    }
 
     _handleClick () {
         this._animationTimeline.replay()
@@ -103,6 +108,7 @@ class ClapAdapter extends Component {
                 isClicked: true
             }
         })
+        this.props.onWtfButtonClick();
     }
 
     render() {
