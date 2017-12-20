@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import logo from './logo.svg';
-//import './App.css';
-import './container.scss'
+import './components/App.css';
 import firebase from 'firebase'
 import YoutubePlayer from './components/youtube-player'
 import config from './config'
+
 require("firebase/firestore");
 
 var wtfApp = firebase.initializeApp(config);
@@ -39,7 +39,7 @@ class App extends Component {
         this.incrementIndex();
     }
 
-    incrementIndex(){
+    incrementIndex() {
         let index = this.state.index;
         if ((index + 1) === this.state.data.length) index = -1;
         this.setState({index: index + 1, wtfCount: this.state.data[index + 1].wtfCount});
@@ -47,7 +47,7 @@ class App extends Component {
 
     onWtfButtonClick() {
         const wtfCount = this.state.wtfCount;
-        this.setState({wtfCount:wtfCount+1});
+        this.setState({wtfCount: wtfCount + 1});
     }
 
     componentWillMount() {
@@ -66,24 +66,21 @@ class App extends Component {
         console.log("stateData:", this.state.data);
         let data = this.state.data[this.state.index] ? this.state.data[this.state.index] : undefined;
         return (
-            <div className="container"> // relatıve posısyonlanması lazım
-                {/*<div className="button-box">
-
-                </div>
-                <div className="next-con"> // absolute posisyonlanması lazım
-                    <i>ıcon koy</i>
-                </div>
-
-                <div className="prev-con"> // absolute posisyonlanması lazım
-                    <i>ıcon koy</i>
-                </div>*/}
-
+            <div className="App">
+                <header className="App-header">
+                    <img src={logo} className="App-logo" alt="logo"/>
+                    <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
+                </header>
+                <p className="App-intro">
+                    Most ridiculous website of 2019
+                </p>
                 <button onClick={this.onNextButtonClick}>Next</button>
                 {data && <button onClick={this.onWtfButtonClick}>What The Fuck Did I Just See</button>}
                 {data && <span>{this.state.wtfCount}</span>}
                 {data && <YoutubePlayer videoId={data.url} onEnd={this._onEnd}/>}
             </div>
         );
+
     }
 }
 
