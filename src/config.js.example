@@ -1,0 +1,10 @@
+const config = {
+    apiKey: "WTF_API_KEY",
+    authDomain: "WTF_AUTH_DOMAIN",
+    databaseURL: "WTF_DATABASE_URL,
+    projectId: "WTF_PROJECT_ID",
+    storageBucket: "WTF_STORAGE_BUCKET",
+    messagingSenderId: "WTF_MESSAGER_SENDER_ID"
+};
+
+export default config;
