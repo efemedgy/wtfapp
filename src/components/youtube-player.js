@@ -6,6 +6,12 @@ import React from 'react';
 import YouTube from 'react-youtube';
 
 class YoutubePlayer extends React.Component {
+
+    constructor(props){
+        super(props);
+        this._onPause = this._onPause.bind(this);
+    }
+
     render() {
         const opts = {
             height: '100%',
@@ -23,12 +29,13 @@ class YoutubePlayer extends React.Component {
                 opts={opts}
                 onReady={this._onReady}
                 onEnd={this._onEnd.bind(this)}
-                onClick={this._onClick}
+                onPause={this._onPause}
             />
         );
     }
 
-    _onClick(event){
+    _onPause(event){
+        this.props.onPause();
     }
 
     _onReady(event) {
