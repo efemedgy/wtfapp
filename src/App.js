@@ -1,24 +1,24 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './components/App.css';
 import firebase from 'firebase'
 import YoutubePlayer from './components/youtube-player'
 import config from './config'
+import ClapAdapter from "./components/clap/clap";
 
 require("firebase/firestore");
 
 var wtfApp = firebase.initializeApp(config);
 
-// You can retrieve services via the defaultApp variable...
-var defaultStorage = wtfApp.storage();
-var defaultDatabase = wtfApp.database();
-
-// ... or you can use the equivalent shorthand notation
-defaultStorage = firebase.storage();
-defaultDatabase = firebase.database();
-
-// Initialize Cloud Firestore through Firebase
-var db = firebase.firestore();
+// // You can retrieve services via the defaultApp variable...
+// var defaultStorage = wtfApp.storage();
+// var defaultDatabase = wtfApp.database();
+//
+// // ... or you can use the equivalent shorthand notation
+// defaultStorage = firebase.storage();
+// defaultDatabase = firebase.database();
+//
+// // Initialize Cloud Firestore through Firebase
+// var db = firebase.firestore();
 
 class App extends Component {
 
@@ -26,6 +26,7 @@ class App extends Component {
         super(props);
         this.state = {
             data: [],
+            video: {},
             index: 0,
             wtfCount: 0,
             videoMode: false
@@ -78,13 +79,15 @@ class App extends Component {
         const index = this.state.index;
         const length = this.state.data.length;
         let randomIndex = Math.floor(Math.random() * length);
-
-        this.setState({videoMode: true, index: randomIndex})
+        //this.state.data[randomIndex].wtfCount
+        this.setState({videoMode: true, index: randomIndex, wtfCount: 11})
     }
 
     openingContent = () => {
         return (
-            <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
+            <div>
+                <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
+            </div>
         )
     }
 
@@ -99,6 +102,8 @@ class App extends Component {
                         <YoutubePlayer videoId={data.url} onEnd={this._onEnd}
                                        onPause={this._onPause} onReady={this._onReady}/>}
                     </header>
+                    {this.state.videoMode && <ClapAdapter wtfCount={this.state.wtfCount}
+                                                          onWtfButtonClick={this.onWtfButtonClick}/>}
                 </div>
             </div>
         );
