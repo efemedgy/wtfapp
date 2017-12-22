@@ -27,7 +27,7 @@ class App extends Component {
         this.state = {
             data: [],
             video: {},
-            index: 0,
+            dataIndex: 0,
             wtfCount: 0,
             videoMode: false
         };
@@ -52,9 +52,9 @@ class App extends Component {
     }
 
     incrementIndex() {
-        let index = this.state.index;
+        let index = this.state.dataIndex;
         if ((index + 1) === this.state.data.length) index = -1;
-        this.setState({index: index + 1, wtfCount: this.state.data[index + 1].wtfCount});
+        this.setState({dataIndex: index + 1, wtfCount: this.state.data[index + 1].wtfCount});
     }
 
     onWtfButtonClick() {
@@ -76,11 +76,11 @@ class App extends Component {
 
     _onReady() {
         console.log("_onReady");
-        const index = this.state.index;
+        const index = this.state.dataIndex;
         const length = this.state.data.length;
         let randomIndex = Math.floor(Math.random() * length);
         //this.state.data[randomIndex].wtfCount
-        this.setState({videoMode: true, index: randomIndex, wtfCount: 11})
+        this.setState({videoMode: true, dataIndex: randomIndex, wtfCount: 11})
     }
 
     openingContent = () => {
@@ -92,7 +92,7 @@ class App extends Component {
     }
 
     render() {
-        let data = this.state.data[this.state.index] ? this.state.data[this.state.index] : undefined;
+        let data = this.state.data[this.state.dataIndex] ? this.state.data[this.state.dataIndex] : undefined;
         return (
             <div>
                 <div className="App">
