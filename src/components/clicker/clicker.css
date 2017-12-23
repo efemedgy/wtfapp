@@ -39,3 +39,5 @@ input {
     opacity: .5;
     border-style: hidden;
 }
+
+button:focus {outline:0;}

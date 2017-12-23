@@ -38,6 +38,7 @@ class App extends Component {
         this._onPause = this._onPause.bind(this);
         this.incrementIndex = this.incrementIndex.bind(this);
         this._onReady = this._onReady.bind(this);
+        this._mouseDownNext = this._mouseDownNext.bind(this);
     }
 
     onNextButtonClick() {
@@ -54,8 +55,8 @@ class App extends Component {
 
     incrementIndex() {
         let index = this.state.dataIndex;
-        if ((index + 1) === this.state.data.length) index = -1;
-        this.setState({dataIndex: index + 1, wtfCount: this.state.data[index + 1].wtfCount});
+        if ((++index) === this.state.data.length) index = 0;
+        this.setState({dataIndex: index, wtfCount: this.state.data[index].wtfCount});
     }
 
     onWtfButtonClick() {
@@ -90,7 +91,7 @@ class App extends Component {
                 <h1 className="App-title">WHAT THE FUCK DID I JUST WATCH</h1>
             </div>
         )
-    }
+    };
 
     render() {
         let data = this.state.data[this.state.dataIndex] ? this.state.data[this.state.dataIndex] : undefined;
@@ -100,30 +101,22 @@ class App extends Component {
                     <header className="App-header">
                         {!this.state.videoMode && this.openingContent()}
                         {data && <YoutubePlayer videoId={data.url} onEnd={this._onEnd}
-                                       onPause={this._onPause} onReady={this._onReady}/>}
-                        {this.state.videoMode && <Clicker/>}
+                                                onPause={this._onPause} onReady={this._onReady}/>}
+                        {this.state.videoMode && <Clicker mouseDownNext={this._mouseDownNext}
+                                                          mouseUpNext={this._mouseUpNext}/>}
                     </header>
                 </div>
             </div>
         );
+    }
 
+    _mouseDownNext() {
+        this.incrementIndex()
+    }
+
+    _mouseUpNext() {
+        /*no op*/
     }
 }
-
-// class YouTube extends Component {
-//     render() {
-//         let videoSrc = "https://www.youtube.com/embed/" +
-//             this.props.video.url + "?autoplay=" +
-//             this.props.autoplay + "&rel=" +
-//             this.props.rel + "&modestbranding=" +
-//             this.props.modest;
-//         return (
-//             <iframe className="player" type="text/html" width="100%" height="750px"
-//                     id="yotubeFrame"
-//                     src={videoSrc}
-//                     frameborder="0"/>
-//         );
-//     }
-// }
 
 export default App;

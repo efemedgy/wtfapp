@@ -14,8 +14,10 @@ class Clicker extends Component {
             pressed: false,
             count: 0
         };
-        this.mouseDown = this.mouseDown.bind(this);
-        this.mouseUp = this.mouseUp.bind(this);
+        this._mouseDownPrev = this._mouseDownPrev.bind(this);
+        this._mouseUpPrev = this._mouseUpPrev.bind(this);
+        this._mouseDownNext = this._mouseDownNext.bind(this);
+        this._mouseUpNext = this._mouseUpNext.bind(this);
         this.loadWtfs = this.loadWtfs.bind(this);
         this.loadWtfs();
     }
@@ -24,33 +26,39 @@ class Clicker extends Component {
         return (
             <div class="main">
                 <p id="count">Count:{this.state.count}</p>
-                <button type="image" src="./wtf.jpg" onMouseDown={this.mouseDown}
+                <button type="image" src="./wtf.jpg" onMouseDown={this._mouseDownNext}
                         className="button-wtf"
-                       onMouseUp={this.mouseUp}/>
-                <button type="image" src="./wtf.jpg" onMouseDown={this.mouseDown}
+                       onMouseUp={this._mouseUpNext}/>
+                <button type="image" src="./wtf.jpg" onMouseDown={this._mouseDownPrev}
                         className="button-next"
-                        onMouseUp={this.mouseUp}/>
+                        onMouseUp={this._mouseUpPrev}/>
             </div>
         )
     }
 
-    mouseDown(e) {
-        console.log("mouseDown")
+    _mouseDownPrev(e) {
+        console.log("_mouseDownPrev")
         e.preventDefault();
         this.setState({pressed: true});
-        //this.loadWtfs();
     }
 
-    mouseUp() {
-        console.log("mouseUp")
+    _mouseUpPrev() {
         this.setState({pressed: false});
     }
 
+    _mouseDownNext(e) {
+        console.log("_mouseDownNext");
+        this.props.mouseDownNext();
+    }
+
+    _mouseUpNext() {
+        console.log("_mouseDownNext");
+        this.props.mouseUpNext();
+    }
+
     loadWtfs () {
-        console.log("onLoad",this);
         let self = this;
         setInterval(function () {
-            console.log("interval");
             if (self.state.pressed) {
                 let div = document.createElement("div");
                 div.textContent = "wtfdidIwatch?"
@@ -69,7 +77,6 @@ class Clicker extends Component {
                 self.setState((prevState,currentProps) => {
                     return {count: nextCount, pressed:false};
                 });
-                console.log(nextCount);
                 document.querySelector("p").textContent = nextCount;
                 let margin = 250
                 let id = setInterval(function () {
