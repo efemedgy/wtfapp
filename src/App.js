@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import './components/App.css';
 import firebase from 'firebase'
-import YoutubePlayer from './components/youtube-player'
+import YoutubePlayer from './components/youtube-player/youtube-player'
 import config from './config'
 import ClapAdapter from "./components/clap/clap";
+import Clicker from "./components/clicker/clicker";
 
 require("firebase/firestore");
 
@@ -98,12 +99,10 @@ class App extends Component {
                 <div className="App">
                     <header className="App-header">
                         {!this.state.videoMode && this.openingContent()}
-                        {data &&
-                        <YoutubePlayer videoId={data.url} onEnd={this._onEnd}
+                        {data && <YoutubePlayer videoId={data.url} onEnd={this._onEnd}
                                        onPause={this._onPause} onReady={this._onReady}/>}
+                        {this.state.videoMode && <Clicker/>}
                     </header>
-                    {this.state.videoMode && <ClapAdapter wtfCount={this.state.wtfCount}
-                                                          onWtfButtonClick={this.onWtfButtonClick}/>}
                 </div>
             </div>
         );

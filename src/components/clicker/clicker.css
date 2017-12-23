@@ -1,0 +1,41 @@
+input {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    margin: 20px;
+    width: 15%;
+    height: 15%;
+    font-weight: bold;
+}
+
+.wtf {
+    text-align: center;
+    position: fixed;
+    top: 250px;
+}
+
+.button-wtf {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    padding: 50px;
+    z-index: 100;
+    background: url(../../images/arrow-right.svg) center center no-repeat;
+    opacity: .5;
+    border-style: hidden;
+}
+
+.button-next {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    padding: 50px;
+    z-index: 100;
+    background: url(../../images/arrow-left.svg) center center no-repeat;
+    opacity: .5;
+    border-style: hidden;
+}
