@@ -25,6 +25,7 @@ input {
     background: url(../../images/arrow-right.svg) center center no-repeat;
     opacity: .5;
     border-style: hidden;
+    cursor: pointer;
 }
 
 .button-next {
@@ -38,6 +39,7 @@ input {
     background: url(../../images/arrow-left.svg) center center no-repeat;
     opacity: .5;
     border-style: hidden;
+    cursor: pointer;
 }
 
 button:focus {outline:0;}

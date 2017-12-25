@@ -6,6 +6,8 @@ import React, {Component} from 'react';
 import "./clicker.css";
 
 const fonts = ['serif', 'sans-serif', 'cursive', 'fantasy', 'monospace'];
+const wtfFontSize = 50;
+const wtfRotate = 360;
 
 class Clicker extends Component {
     constructor(props) {
@@ -61,10 +63,10 @@ class Clicker extends Component {
         setInterval(function () {
             if (self.state.pressed) {
                 let div = document.createElement("div");
-                div.textContent = "wtfdidIwatch?"
-                div.classList.add("wtf")
-                div.style.fontSize = (20 + Math.random() * 150 | 0) + "px"
-                div.style.left = (Math.random() * (document.body.clientWidth - 100) | 0) + "px"
+                div.textContent = "wtfdidIwatch?";
+                div.classList.add("wtf");
+                div.style.fontSize = (20 + Math.random() * wtfFontSize | 0) + "px";
+                div.style.left = (Math.random() * (document.body.clientWidth - 100) | 0) + "px";
                 div.style.color = "rgb(" + (Math.random() * 255 | 0) + "," + (Math.random() * 255 | 0) + "," + (Math.random() * 255 | 0) + ")"
                 div.style.fontFamily = fonts[Math.random() * fonts.length | 0]
                 if (Math.random() > 0.7) {

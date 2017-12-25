@@ -11,6 +11,7 @@ class YoutubePlayer extends React.Component {
         super(props);
         this._onPause = this._onPause.bind(this);
         this._onReady = this._onReady.bind(this);
+        this._onError = this._onError.bind(this);
     }
 
     render() {
@@ -22,11 +23,10 @@ class YoutubePlayer extends React.Component {
                 controls: 0,
                 showCaptions: 0,
                 disableKeyboard: 0,
-                allowFullscreen: 1,
                 annotations: 0,
                 modestBranding: 1,
                 showInfo: 0,
-                volume: 0.8
+                playsInline: 1,
             },
             frameborder: 0,
         };
@@ -37,8 +37,11 @@ class YoutubePlayer extends React.Component {
                 videoId={this.props.videoId}
                 opts={opts}
                 onReady={this._onReady}
+                onError={this._onError}
                 onEnd={this._onEnd.bind(this)}
                 onPause={this._onPause}
+                playsInline={true}
+                annotations={false}
             />
         );
     }
@@ -61,6 +64,10 @@ class YoutubePlayer extends React.Component {
 
     _onEnd(event) {
         this.props.onEnd();
+    }
+
+    _onError(event){
+        this.props.onError();
     }
 
 }
