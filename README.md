@@ -1,1 +1,1 @@
-wtfididwatch.firebaseapp.com
+www.wtfdidiwatch.com
